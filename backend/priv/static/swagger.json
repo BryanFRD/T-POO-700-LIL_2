@@ -430,6 +430,14 @@
       },
       "description": "A collection of Workingtimes"
     },
+    "Workingtimes": {
+      "type": "array",
+      "title": "Workingtimes",
+      "items": {
+        "$ref": "#/definitions/Workingtime"
+      },
+      "description": "A collection of Workingtimes"
+    },
     "WorkingtimeAttributes": {
       "type": "object",
       "title": "WorkingtimeAttributes",
@@ -492,6 +500,14 @@
       },
       "description": "A user's working time"
     },
+    "Clocks": {
+      "type": "array",
+      "title": "Clocks",
+      "items": {
+        "$ref": "#/definitions/Clock"
+      },
+      "description": "A collection of Clocks"
+    },
     "ClockAttributes": {
       "type": "object",
       "title": "ClockAttributes",
@@ -552,6 +568,66 @@
         "id": 1
       },
       "description": "Timestamp of clock in or out for a user"
+    },
+    "Users": {
+      "type": "array",
+      "title": "Users",
+      "items": {
+        "$ref": "#/definitions/User"
+      },
+      "description": "A collection of Users"
+    },
+    "UserAttributes": {
+      "type": "object",
+      "title": "UserAttributes",
+      "required": [
+        "username",
+        "email"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user's username"
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address"
+        }
+      },
+      "example": {
+        "username": "john_doe",
+        "email": "john.doe@email.com"
+      },
+      "description": "Attributes for creating or updating a user"
+    },
+    "User": {
+      "type": "object",
+      "title": "User",
+      "required": [
+        "username",
+        "email",
+        "id"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user's username"
+        },
+        "id": {
+          "type": "number",
+          "description": "Unique identifier for the user"
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address"
+        }
+      },
+      "example": {
+        "username": "Joe",
+        "id": 1,
+        "email": "joe@mail.com"
+      },
+      "description": "A user of the application"
     },
     "Users": {
       "type": "array",
