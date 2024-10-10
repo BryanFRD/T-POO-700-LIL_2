@@ -12,7 +12,6 @@
 
 alias TimeManager.Repo
 alias TimeManager.Users.User
-alias TimeManager.Clocks.Clock
 alias TimeManager.Workingtimes.Workingtime
 
 # Add Faker for generating random data
