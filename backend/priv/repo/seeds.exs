@@ -15,41 +15,26 @@ alias TimeManager.Users.User
 alias TimeManager.Clocks.Clock
 alias TimeManager.Workingtimes.Workingtime
 
-# Inserting Users
-user1 =
-  Repo.insert!(%User{
-    username: "John Doe",
-    email: "john.doe@example.com"
+# Add Faker for generating random data
+{:ok, _} = Application.ensure_all_started(:faker)
+
+# Create 10 users with random data
+for _ <- 1..10 do
+  user = Repo.insert!(%User{
+    username: Faker.Internet.user_name,
+    email: Faker.Internet.email,
   })
 
-user2 =
-  Repo.insert!(%User{
-    username: "Jane Smith",
-    email: "jane.smith@example.com"
-  })
+  # Create workingtime from here to 10 days ago going around 6am-10am to 4pm-10pm
+  for time <- 1..10 do
+    start_time = Faker.DateTime.backward(time * 24 * 60 * 60) |> DateTime.add(6 * 60 * 60 + :rand.uniform(4 * 60 * 60), :second)
+    end_time = DateTime.add(start_time, 8 * 60 * 60 + :rand.uniform(8 * 60 * 60), :second)
 
-# Inserting Clocks
-Repo.insert!(%Clock{
-  user_id: user1.id,
-  status: true,
-  time: ~N[2024-10-08 08:00:00]
-})
+    workingtime = Repo.insert!(%Workingtime{
+      user_id: user.id,
+      start: start_time,
+      end: end_time,
+    })
+  end
 
-Repo.insert!(%Clock{
-  user_id: user2.id,
-  status: false,
-  time: ~N[2024-10-08 17:00:00]
-})
-
-# Inserting Working Times
-Repo.insert!(%Workingtime{
-  user_id: user1.id,
-  start: ~N[2024-10-08 08:00:00],
-  end: ~N[2024-10-08 17:00:00]
-})
-
-Repo.insert!(%Workingtime{
-  user_id: user2.id,
-  start: ~N[2024-10-08 08:00:00],
-  end: ~N[2024-10-08 18:00:00]
-})
+end

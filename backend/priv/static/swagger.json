@@ -1,6 +1,6 @@
 {
-  "basePath": "/api",
   "swagger": "2.0",
+  "basePath": "/api",
   "paths": {
     "/workingtimes/{user_id}/{id}": {
       "get": {
@@ -422,22 +422,6 @@
     }
   },
   "definitions": {
-    "Workingtimes": {
-      "type": "array",
-      "title": "Workingtimes",
-      "items": {
-        "$ref": "#/definitions/Workingtime"
-      },
-      "description": "A collection of Workingtimes"
-    },
-    "Workingtimes": {
-      "type": "array",
-      "title": "Workingtimes",
-      "items": {
-        "$ref": "#/definitions/Workingtime"
-      },
-      "description": "A collection of Workingtimes"
-    },
     "WorkingtimeAttributes": {
       "type": "object",
       "title": "WorkingtimeAttributes",
@@ -460,6 +444,52 @@
         "end": "2024-10-08 17:00:00"
       },
       "description": "Attributes for creating or updating a workingtime"
+    },
+    "UserAttributes": {
+      "type": "object",
+      "title": "UserAttributes",
+      "required": [
+        "username",
+        "email"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user's username"
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address"
+        }
+      },
+      "example": {
+        "username": "john_doe",
+        "email": "john.doe@email.com"
+      },
+      "description": "Attributes for creating or updating a user"
+    },
+    "ClockAttributes": {
+      "type": "object",
+      "title": "ClockAttributes",
+      "required": [
+        "status",
+        "time"
+      ],
+      "properties": {
+        "time": {
+          "type": "datetime",
+          "description": "Timestamp for clock"
+        },
+        "status": {
+          "type": "boolean",
+          "description": "Clock in or out"
+        }
+      },
+      "example": {
+        "time": "2024-10-08 12:00:00",
+        "status": true
+      },
+      "description": "Attributes for creating a clock"
     },
     "Workingtime": {
       "type": "object",
@@ -500,36 +530,50 @@
       },
       "description": "A user's working time"
     },
-    "Clocks": {
+    "Workingtimes": {
       "type": "array",
-      "title": "Clocks",
+      "title": "Workingtimes",
       "items": {
-        "$ref": "#/definitions/Clock"
+        "$ref": "#/definitions/Workingtime"
       },
-      "description": "A collection of Clocks"
+      "description": "A collection of Workingtimes"
     },
-    "ClockAttributes": {
+    "User": {
       "type": "object",
-      "title": "ClockAttributes",
+      "title": "User",
       "required": [
-        "status",
-        "time"
+        "username",
+        "email",
+        "id"
       ],
       "properties": {
-        "time": {
-          "type": "datetime",
-          "description": "Timestamp for clock"
+        "username": {
+          "type": "string",
+          "description": "The user's username"
         },
-        "status": {
-          "type": "boolean",
-          "description": "Clock in or out"
+        "id": {
+          "type": "number",
+          "description": "Unique identifier for the user"
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address"
         }
       },
       "example": {
-        "time": "2024-10-08 12:00:00",
-        "status": true
+        "username": "Joe",
+        "id": 1,
+        "email": "joe@mail.com"
       },
-      "description": "Attributes for creating a clock"
+      "description": "A user of the application"
+    },
+    "Users": {
+      "type": "array",
+      "title": "Users",
+      "items": {
+        "$ref": "#/definitions/User"
+      },
+      "description": "A collection of Users"
     },
     "Clock": {
       "type": "object",
@@ -568,126 +612,6 @@
         "id": 1
       },
       "description": "Timestamp of clock in or out for a user"
-    },
-    "Users": {
-      "type": "array",
-      "title": "Users",
-      "items": {
-        "$ref": "#/definitions/User"
-      },
-      "description": "A collection of Users"
-    },
-    "UserAttributes": {
-      "type": "object",
-      "title": "UserAttributes",
-      "required": [
-        "username",
-        "email"
-      ],
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "The user's username"
-        },
-        "email": {
-          "type": "string",
-          "description": "The user's email address"
-        }
-      },
-      "example": {
-        "username": "john_doe",
-        "email": "john.doe@email.com"
-      },
-      "description": "Attributes for creating or updating a user"
-    },
-    "User": {
-      "type": "object",
-      "title": "User",
-      "required": [
-        "username",
-        "email",
-        "id"
-      ],
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "The user's username"
-        },
-        "id": {
-          "type": "number",
-          "description": "Unique identifier for the user"
-        },
-        "email": {
-          "type": "string",
-          "description": "The user's email address"
-        }
-      },
-      "example": {
-        "username": "Joe",
-        "id": 1,
-        "email": "joe@mail.com"
-      },
-      "description": "A user of the application"
-    },
-    "Users": {
-      "type": "array",
-      "title": "Users",
-      "items": {
-        "$ref": "#/definitions/User"
-      },
-      "description": "A collection of Users"
-    },
-    "UserAttributes": {
-      "type": "object",
-      "title": "UserAttributes",
-      "required": [
-        "username",
-        "email"
-      ],
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "The user's username"
-        },
-        "email": {
-          "type": "string",
-          "description": "The user's email address"
-        }
-      },
-      "example": {
-        "username": "john_doe",
-        "email": "john.doe@email.com"
-      },
-      "description": "Attributes for creating or updating a user"
-    },
-    "User": {
-      "type": "object",
-      "title": "User",
-      "required": [
-        "username",
-        "email",
-        "id"
-      ],
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "The user's username"
-        },
-        "id": {
-          "type": "number",
-          "description": "Unique identifier for the user"
-        },
-        "email": {
-          "type": "string",
-          "description": "The user's email address"
-        }
-      },
-      "example": {
-        "username": "Joe",
-        "id": 1,
-        "email": "joe@mail.com"
-      },
-      "description": "A user of the application"
     }
   },
   "host": "localhost:4000",

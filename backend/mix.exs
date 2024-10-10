@@ -55,7 +55,8 @@ defmodule TimeManager.MixProject do
       {:ex_json_schema, "~> 0.5"},
       {:poison, "~> 3.1"},
       {:ex_doc, "~> 0.30", only: :dev, runtime: false},
-      {:cors_plug, "~> 3.0"}
+      {:cors_plug, "~> 3.0"},
+      {:faker, "~> 0.17"}
     ]
   end
 
