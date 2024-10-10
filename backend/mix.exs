@@ -56,6 +56,7 @@ defmodule TimeManager.MixProject do
       {:poison, "~> 3.1"},
       {:ex_doc, "~> 0.30", only: :dev, runtime: false},
       {:cors_plug, "~> 3.0"},
+      {:timex, "~> 3.7"},
       {:faker, "~> 0.17"}
     ]
   end

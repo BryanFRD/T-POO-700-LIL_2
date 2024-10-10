@@ -25,16 +25,14 @@ for _ <- 1..10 do
     email: Faker.Internet.email,
   })
 
-  # Create workingtime from here to 10 days ago going around 6am-10am to 4pm-10pm
-  for time <- 1..10 do
-    start_time = Faker.DateTime.backward(time * 24 * 60 * 60) |> DateTime.add(6 * 60 * 60 + :rand.uniform(4 * 60 * 60), :second)
-    end_time = DateTime.add(start_time, 8 * 60 * 60 + :rand.uniform(8 * 60 * 60), :second)
-
-    workingtime = Repo.insert!(%Workingtime{
-      user_id: user.id,
-      start: start_time,
-      end: end_time,
-    })
+  # Create 10 workingtimes for each user going x days behind today from 6-10am to 4-10pm
+  for day <- 1..10 do
+    for hour <- 6..16 do
+      workingtime = Repo.insert!(%Workingtime{
+        user_id: user.id,
+        start: Timex.now() |> Timex.shift(days: -day) |> Timex.shift(hours: hour) |> DateTime.to_naive() |> NaiveDateTime.truncate(:second),
+        end: Timex.now() |> Timex.shift(days: -day) |> Timex.shift(hours: hour + 8) |> DateTime.to_naive() |> NaiveDateTime.truncate(:second),
+      })
+    end
   end
-
 end
