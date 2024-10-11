@@ -9,7 +9,8 @@ const route = useRoute()
 
 const routeNames = [
   { name: 'clock', label: 'Clock' },
-  { name: 'working-times', label: 'Working Times' }
+  { name: 'working-times', label: 'Working Times' },
+  { name: 'charts', label: 'Charts' }
 ]
 </script>
 
